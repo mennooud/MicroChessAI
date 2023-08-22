@@ -8,15 +8,16 @@ class Piece:
         self.name = name
         self.color = color
         value_sign = 1 if color == 'white' else -1
-        self.value = value = value_sign
+        self.value = value * value_sign
         self.moves = []
         self.moved = False
+        self.texture = texture
         self.set_texture()
         self.texture_rect = texture_rect
 
     def set_texture(self):
         self.texture = os.path.join(
-            f'data/imgs/{self.color}_{self.name}.png')
+            f'imgs/{self.color}_{self.name}.png')
         
     def add_move(self, move):
         self.moves.append(move)
@@ -24,13 +25,11 @@ class Piece:
     def clear_moves(self):
         self.moves = []
 
+
 class Pawn(Piece):
 
     def __init__(self, color):
-        if color == 'white':
-            self.dir = -1
-        else:
-            self.dir = 1
+        self.dir = -1 if color == 'white' else 1
         super().__init__('pawn', color, 1.0)
 
 class Knight(Piece):

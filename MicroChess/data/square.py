@@ -9,6 +9,9 @@ class Square:
         self.col = col
         self.piece = piece
 
+    def __eq__(self, other):
+        return self.row == other.row and self.col == other.col
+
     def has_piece(self):
         return self.piece != None
     
@@ -20,7 +23,8 @@ class Square:
     
     def has_rival_piece(self, color):
         return self.has_piece() and self.piece.color != color
-
+        # print(f"Checking rival piece for color {color} at ({self.row}, {self.col}): Has piece? {self.has_piece()}, Piece color: {self.piece.color if self.piece else 'None'}, Result: {result}")
+        
     def isempty_or_rival(self, color):
         return self.isempty() or self.has_rival_piece(color)
     
