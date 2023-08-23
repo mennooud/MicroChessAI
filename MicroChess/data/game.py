@@ -12,10 +12,10 @@ class Game:
 
     def __init__(self):
         self.next_player = 'white'
-        # self.board  = Board()
         self.dragger = Dragger()
         self.turn_count = 0
         self.board  = Board(self)
+        self.is_game_over = False
 
     # Blit methods
 
@@ -76,12 +76,14 @@ class Game:
 
     # Other methods
     def next_turn(self):
+        print(f"Move: {self.next_player}'s turn {self.turn_count}")
         self.next_player = 'white' if self.next_player == 'black' else 'black'
         self.turn_count += 1
+        self.is_game_over = False
 
     def end_game(self):
-        white_king_present = False
-        black_king_present = False
+        white_king_present = True
+        black_king_present = True
 
         for row in self.board.squares:
             for square in row:
@@ -95,13 +97,13 @@ class Game:
         if not white_king_present:
             print("White king missing!")
             winner = 'black'
+            self.is_game_over = True
         elif not black_king_present:
             print("Black king missing!")
             winner = 'white'
+            self.is_game_over = True
         else:
             return False  # No king has been captured, so the game hasn't ended
 
         print(f"{winner} wins in {self.turn_count} turns!")
-        pygame.quit()
         return True
-

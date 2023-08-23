@@ -1,3 +1,5 @@
+# const.py
+
 # Screen dimensions
 WIDTH = 400
 HEIGHT = 500
